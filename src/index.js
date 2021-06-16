@@ -37,40 +37,7 @@ async function doSolveThis(context){
  
 }
 
-async function askCommand(context){
-  var parseString = context.event.text
-
-  // this will split the string by space 
-  var splittedString = parseString.split(" ") 
-
-  // this get the whole equation 
-  var eq = splittedString.slice(1, splittedString.length )  
-  var searchWord= eq.join(" ");
-
-  try {
-    // fetch dsds
-    var response = await fetch(`https://api.wolframalpha.com/v2/query?input=${searchWord}&format=plaintext&output=JSON&appid=PRQRG9-5QU2GP4YEW`)
-    var jsonBlocks = await response.json()
-    var summaryText = ["queryresult"]["pods"]
-
-    //test
-    /**
-    var parsedSummaryText = summaryText.match(/.{1,640}/g)
-    for(i=0; i <parsedSummaryText.length; i++){
-      await context.typing(1000);
-      await context.sendText(parsedSummaryText[i]);
-    }
-    **/
-    
-  }  
-  catch (e) {    
-    await context.sendText("try again /help") 
-    console.error(e)    
-  }
-}
-
 async function sendHelp(context){
-  await context.sendText("Hi kindly choose the some  commands ") 
   await context.sendText(`
   COMMANDS:  
   /search - this will help you to find the top result articles
@@ -88,10 +55,11 @@ async function sendHelp(context){
   `)
 }
 
+
 async function mathSend(context){
-  await context.sendText("Here are the math commands: ") 
+  
   await context.sendText(`
-  LIST COMMAND:
+  MATH COMMANDS:
   /simplify  
   /factor  
   /derive  
@@ -182,7 +150,7 @@ async function googleSearch(context){
 
   try {
     // fetch dsds
-    var response = await fetch(`https://google-scraper-zaki.herokuapp.com/searchspecific/${searchWord}`)
+    var response = await fetch(`https://zaki-scraper3.herokuapp.com/searchspecific/${searchWord}`)
     var jsonBlocks = await response.json()
     var summaryText = jsonBlocks[0]
     await context.typing(1000);
