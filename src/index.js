@@ -123,7 +123,7 @@ async function dictionarySend(context){
     await context.sendText(temporaryData[0]["definitions"][0]["definition"])
   }  
   catch (e) {
-    await context.sendText("try again /help")    
+    await context.sendText("try again /help ")    
     console.error(e)    
   }
 }
